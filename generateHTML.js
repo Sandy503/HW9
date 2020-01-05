@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML(data) {
+function generateHTML(data, res, stars) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -170,5 +170,54 @@ function generateHTML(data) {
             zoom: .75; 
           } 
          }
-      </style>`
-        }
+        </style>
+      </head>
+      <body>
+        <div>
+        
+          <div>
+            <img src="${res.data.avatar_url}">
+            <h1>Hi!</h1>
+            <h1>My name is ${res.data.name}</h1>
+            <h3>Currently employed at ${res.data.company}</h4>
+            <div>
+                <h5><i class="fas fa-map-marker-alt"></i>${res.data.location}</h6>
+                <a href="${res.data.html_url}"><i></i>GitHub</a>
+                <a href="${res.data.blog}"><i></i>Website</a>
+            </div>
+        </div>
+        
+        <main>
+            <div>
+                  
+            <h1>${res.data.bio}</h1>
+            
+            <div>
+              <div>
+                <h2>Followers</h2>
+                <h3>${res.data.followers}</h3>
+              </div>
+              <div>
+                <h2>Following</h2>
+                <h3>${res.data.following}</h3>
+              </div>
+            </div>
+            <br>
+            <div>
+              <div>
+                <h2>GitHub stars</h2>
+                <h3>${stars.data.length}</h3>
+              </div>
+              <div>
+                <h2>Public Repos</h2>
+                <h3>${res.data.public_repos}</h3>
+              </div>  
+            </div>
+            <br>
+        </div>
+        </main>
+    </div>
+      </body>
+      </html>
+      `}
+module.exports = generateHTML;
