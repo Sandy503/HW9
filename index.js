@@ -36,7 +36,21 @@ questions = () => {
           writeFileAsync("newProfile.html", html);
     
         }).then( () => {
-          readFileAsync("newProfile.html", "utf8")
+          readFileAsync("newProfile.html", "utf8").then((htmlString) => {
+
+            const toPDF = electronToHTML({
+              converterPath:electronToHTML.converters.PDF
+            });
+      
+            toPDF({html:htmlString}, function(err,result){
+              if(err){
+                return console.error(err);
+              }
+              result.stream.pipe(fs.createWriteStream('gitProfile.pdf'));
+              toPDF.kill();
+            });
+    
+          });
     
         });
     
